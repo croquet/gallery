@@ -9,7 +9,7 @@ export function init(Constants) {
 
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "openPortal.js", "urlLink.js", "cradle.js"
+        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "openPortal.js", "urlLink.js", "cradle.js", "replaceWorld.js"
     ];
 
     const frameColor = 0x888888;
@@ -305,6 +305,47 @@ width: 1.8,
                 layers: ["pointer"],
                 shadow: true,
                 scale: [0.2, 0.2, 0.2],
+            }
+        },
+        {
+            card: {
+                name: "Physics Card",
+                translation: [5,0.6,17], 
+                behaviorModules: ["ReplaceWorld"],
+                targetURL: "https://croquet.github.io/physics/",
+                rotation: [0, Math.PI, 0],
+                layers: ["pointer"],
+                scale: [4, 4, 4],
+                type: "2d",
+                textureType: "image",
+                textureLocation: "./assets/images/Fountain.png",
+                fullBright: true,
+                frameColor: 0xcccccc,
+                color: 0xffffff,
+                cornerRadius: 0.05,
+                depth: 0.05,
+                shadow: true,
+            }
+        },
+
+        {
+            card: {
+                name: "Mythos Card",
+                translation: [-5,0.6,17], 
+                behaviorModules: ["ReplaceWorld"],
+                targetURL: "https://croquet.github.io/mythos",
+                rotation: [0, Math.PI, 0],
+                layers: ["pointer"],
+                scale: [4, 4, 4],
+                type: "2d",
+                textureType: "image",
+                textureLocation: "./assets/images/Croquet Mythos.png",
+                fullBright: true,
+                frameColor: 0xcccccc,
+                color: 0xffffff,
+                cornerRadius: 0.05,
+                depth: 0.05,
+                shadow: true,
             }
         },
     ];
