@@ -9,7 +9,8 @@ export function init(Constants) {
 
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "openPortal.js", "urlLink.js", "cradle.js", "replaceWorld.js"
+        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", 
+        "openPortal.js", "urlLink.js", "cradle.js", "replaceWorld.js"
     ];
 
     const frameColor = 0x888888;
@@ -234,19 +235,19 @@ export function init(Constants) {
                 depth: 0.05,
                 type: "text",
                 runs: [{text: `
-translation: [-12, -0.4, -10.2],
-rotation: [0, -1.5707963267948966, 0],
-layers: ["pointer"],
-className: "PortalActor",
-color: 16737996,
-cornerRadius: 0.05,
-depth: 0.05,
-frameColor: 8947848,
-height: 2.4,
-portalURL: "?world=refinery",
-type: "2d",
-width: 1.8,
-`}],
+                    translation: [-12, -0.4, -10.2],
+                    rotation: [0, -1.5707963267948966, 0],
+                    layers: ["pointer"],
+                    className: "PortalActor",
+                    color: 16737996,
+                    cornerRadius: 0.05,
+                    depth: 0.05,
+                    frameColor: 8947848,
+                    height: 2.4,
+                    portalURL: "?world=refinery",
+                    type: "2d",
+                    width: 1.8,
+                    `}],
                 margins: {left: 20, top: 20, right: 20, bottom: 20},
                 backgroundColor: 0xf4e056,
                 //color: 0xf4e056,
@@ -260,7 +261,7 @@ width: 1.8,
         */
         {
             card: {
-                translation: [11.914606500892997, 0.4, 0.25],
+                translation: [11.914606500892997, 0.75, 0.25],
                 scale: [4, 4, 4],
                 rotation: [0, -Math.PI / 2, 0],
                 layers: ["pointer"],
@@ -270,7 +271,7 @@ width: 1.8,
                 frameColor: 16777215,
                 fullBright: true,
                 modelType: "pdf",
-                pdfLocation: "3i2bjIBqONmUqz8XGj0oguUVu-wJleyHEiMp8RBLCX2sAR0dGRpTRkYPAAUMGkccGkcKGwYYHAwdRwAGRhxGLg0_CxAFIBooAjgKKzENWi4RCB8QHjwiPjAwW0YABkcKGwYYHAwdRwQAChsGHwwbGgxGWjFcGQxRBQY8IA4-UBkaLwMTHBsEIA1cEVsCGTY2LCgKIBlROw8tNg8-XUYNCB0IRhAeHRoqCw8EBjguAxMiBQQxBDw7Xl8AKiddMVkdIB02Nh4zIRskGyomXgI",
+                pdfLocation: "./assets/PDF/Gallery Readme.pdf",
                 shadow: true,
                 singleSided: true,
                 type: "2d",
