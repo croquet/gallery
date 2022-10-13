@@ -19,16 +19,6 @@ export function init(Constants) {
     Constants.DefaultCards = [
         {
             card: {
-                name: "entrance",
-                type: "object",
-                // same position and orientation as in openPortal.js
-                translation: [-12, -0.4, -10.2],
-                rotation: [0, -Math.PI / 2, 0],
-                spawn: "default",
-            }
-        },
-        {
-            card: {
                 name:"world model",
                 type: "3d",
                 fileName: "/artgallery_042122.glb.zip",
@@ -37,8 +27,7 @@ export function init(Constants) {
                 shadow: true,
                 layers: ["walk"],
                 translation:[0, -1.7, 0],
-                dataScale:[1,1,1],
-
+                scale:[1,1,1], // microverse scale
                 placeholder: true,
                 placeholderSize: [400, 0.1, 400],
                 placeholderColor: 0x808080,
@@ -100,7 +89,6 @@ export function init(Constants) {
                 layers: ["pointer"],
                 behaviorModules: ["Billboard"],
                 dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
-                dataScale: [1, 1, 1],
                 fileName: "/Auggie2.glb",
                 modelType: "glb",
                 license: "CC-BY",
@@ -271,7 +259,7 @@ export function init(Constants) {
                 frameColor: 16777215,
                 fullBright: true,
                 modelType: "pdf",
-                pdfLocation: "./assets/PDF/Gallery Readme.pdf",
+                pdfLocation: "./assets/PDF/The Augmented Conversation.pdf",
                 shadow: true,
                 singleSided: true,
                 type: "2d",
@@ -349,6 +337,16 @@ export function init(Constants) {
                 cornerRadius: 0.05,
                 depth: 0.05,
                 shadow: true,
+            }
+        },
+        {
+            card: { // avatar spawn location
+                name: "entrance",
+                type: "object",
+                // same position and orientation as in openPortal.js
+                translation: [-12, -0.4, -10.2],
+                rotation: [0, -Math.PI / 2, 0],
+                spawn: "default",
             }
         },
     ];
