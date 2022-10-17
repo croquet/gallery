@@ -1,5 +1,5 @@
 {
-  "name": "my-croquet-microverse-world",
+  "name": "croquet-microverse-gallery-world",
   "version": "1.0.0",
   "description": "A World in Croquet Microverse",
   "scripts": {
@@ -8,7 +8,7 @@
     "watch-server": "watch-server"
   },
   "dependencies": {
-    "@croquet/microverse-library": "^0.1.15"
+    "@croquet/microverse-library": "^0.1.16"
   },
   "devDependencies": {
     "@croquet/microverse-file-server": "^1.0.4",
