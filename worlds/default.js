@@ -9,7 +9,7 @@ export function init(Constants) {
 
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", 
+        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "flightTracker.js", "spin.js",
         "openPortal.js", "urlLink.js", "cradle.js", "replaceWorld.js"
     ];
 
@@ -139,7 +139,6 @@ export function init(Constants) {
         {
             card: {
                 name: "bitcointracker",
-                translation: [-5, 0.6, -16.87],
                 rotation: [0, 0, 0],
                 scale: [3, 3, 3],
                 type: "2d",
@@ -181,6 +180,18 @@ export function init(Constants) {
                 height: 0.4,
                 parent: "main",
                 behaviorModules: ["BarGraph"],
+            }
+        },
+
+        {
+            card: {
+                name: "FlightTracker",
+                type: "object",
+                translation: [-10.752, -1.06, -15.7],
+                scale: [0.2, 0.2, 0.2],
+                behaviorModules: ["Elected", "FlightTracker", "Spin"],
+                layers: ["pointer"],
+                color: 0xaaaaaa,
             }
         },
 
