@@ -88,7 +88,7 @@ class FlightTrackerPawn {
         }, this.id);
 
         geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-        let material = new THREE.PointsMaterial( { size: 0.075, sizeAttenuation: true, map: sprite, alphaTest: 0.5, transparent: true } );
+        let material = new THREE.PointsMaterial( { size: 0.025, sizeAttenuation: true, map: sprite, alphaTest: 0.5, transparent: true } );
         material.color.set( 0xffaa33 );
 
         this.planes = new THREE.Points( geometry, material );
