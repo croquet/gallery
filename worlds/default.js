@@ -7,6 +7,9 @@ export function init(Constants) {
         "newwhite", "madhatter", "marchhare", "queenofhearts", "cheshirecat", "alice"
     ];
 
+    Constants.ExcludedSystemBehaviorModules = ["gizmo.js"];
+    Constants.IncludedSystemBehaviorModules = ["pedestal.js"];
+
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
         "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "flightTracker.js", "spin.js",
