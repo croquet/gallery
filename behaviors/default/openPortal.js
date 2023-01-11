@@ -18,7 +18,7 @@ class OpenRefineryPortalActor {
         this.hasOpened = true;
 
         this.createCard({
-            translation: [-12, -0.4, -10.2],
+            translation: [-12, -0.4, -10.8],
             rotation: [0, -1.5707963267948966, 0],
             layers: ["pointer"],
             className: "PortalActor",
@@ -26,7 +26,7 @@ class OpenRefineryPortalActor {
             cornerRadius: 0.05,
             depth: 0.05,
             frameColor: 8947848,
-            portalURL: "?world=factory",
+            portalURL: "https://croquet.io/datacenter/",
             type: "2d",
             width: 1.8,
             height: 2.4,
