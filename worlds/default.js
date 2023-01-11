@@ -7,34 +7,51 @@ export function init(Constants) {
         "newwhite", "madhatter", "marchhare", "queenofhearts", "cheshirecat", "alice"
     ];
 
-    Constants.ExcludedSystemBehaviorModules = ["gizmo.js"];
-    Constants.IncludedSystemBehaviorModules = ["pedestal.js"];
-
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "flightTracker.js", "spin.js",
-        "openPortal.js", "urlLink.js", "cradle.js", "replaceWorld.js"
+        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "openPortal.js", "urlLink.js", "text3D.js", "pool.js", "video.js"
     ];
 
     const frameColor = 0x888888;
-    Constants.UseRapier = true;
 
     Constants.DefaultCards = [
+        {
+            card: {
+                name: "entrance",
+                type: "object",
+                // same position and orientation as in openPortal.js
+                translation: [-12, -0.4, -10.2],
+                rotation: [0, -1.97, 0],
+                spawn: "default",
+            }
+        },
         {
             card: {
                 name:"world model",
                 type: "3d",
                 fileName: "/artgallery_042122.glb.zip",
-                dataLocation: "3gkoR_36xHp5-TB2swDY0iqUyhSXz2JwqpQnlM7mfYVgDxMTFxRdSEgBDgsCFEkSFEkEFQgWEgITSQ4ISBJIIAMxBR4LLhQmDDYEJT8DVCAfBhEeEDIsMD4-VUgOCEkEFQgWEgITSQoOBBUIEQIVFAJIVSoPLiM9MAINDgQAM1YWUAMoHVEjEgw1Pw4qJVZKDg0sJCNVKT4DCiwFLkgDBhMGSCQGVl8xNCQqSkoKUi8vIQkOPy4WXx0NKi8DChUvJjEVVlUyLAAdEVItMFc",
+                dataLocation: "./assets/3D/artgallery_pool.glb",
+                //dataLocation: "3gkoR_36xHp5-TB2swDY0iqUyhSXz2JwqpQnlM7mfYVgDxMTFxRdSEgBDgsCFEkSFEkEFQgWEgITSQ4ISBJIIAMxBR4LLhQmDDYEJT8DVCAfBhEeEDIsMD4-VUgOCEkEFQgWEgITSQoOBBUIEQIVFAJIVSoPLiM9MAINDgQAM1YWUAMoHVEjEgw1Pw4qJVZKDg0sJCNVKT4DCiwFLkgDBhMGSCQGVl8xNCQqSkoKUi8vIQkOPy4WXx0NKi8DChUvJjEVVlUyLAAdEVItMFc",
                 singleSided: true,
                 shadow: true,
                 layers: ["walk"],
-                translation:[0, -1.7, 0],
-                scale:[1,1,1], // microverse scale
+                translation:[0, -1.676, 0],
+                dataScale:[1,1,1],
+
                 placeholder: true,
                 placeholderSize: [400, 0.1, 400],
                 placeholderColor: 0x808080,
                 placeholderOffset: [0, 0, 0],
+            }
+        },
+        {        
+            card:{
+                name:"pool",
+                type: "object",
+                translation: [-2.5, -1.6, -5.5],
+                layers: ["pointer", "walk"],
+                behaviorModules: ["Pool"],
+                poolSize: [5.6, 5.6],
             }
         },
         {
@@ -48,18 +65,62 @@ export function init(Constants) {
                 dataType: "exr",
             }
         },
+
         {
-            card: {
-                name: "image card",
-                translation: [12, 0.6, 10.77],
+            card: { // this opens the portal in the wrong place in the small world
+                name: "portal button",
+                translation: [-12.1, 1.3, -10.82],
+                behaviorModules: ["OpenRefineryPortalButton"],
+                type: "object",
+            }
+        },
+        {
+            card: { // slot 1
+                name: "Croquet Presentation",
+                translation: [6.8, 1.35, -10.25],
+                scale: [5, 5, 5],
                 rotation: [0, -Math.PI / 2, 0],
-                scale: [4, 4, 4],
+                layers: ["pointer"],
+                behaviorModules: ["PDFView"],
+                color: 8947848,
+                depth: 0.05,
+                frameColor: 16777215,
+                fullBright: true,
+                modelType: "pdf",
+                pdfLocation: "3xH6Eb5U-W520OR_JpIFOiKAcOuQ4TwP5KbywfuFlKuUEAwMCAtCV1ceERQdC1YNC1YbChcJDR0MVhEXVw1XAi0MDyg3Aj4NNytJMxEfNSIRTUtBAD48P0BISlcRF1YbChcJDR0MVhURGwoXDh0KCx1WFBcbGRQcHQ4cHR4ZDRQMVzUTNAgKMhIyVUgOQC40MhcuTSkqOi8TASsySjQIOUEZCQ8aKi4MAAE2Di1XHBkMGVcWCw1JPDcKSD8rLQE7NBoCCzcMNhQhQBZJFA80CjkqFzdPIkwqSStOSU4f",
+                shadow: true,
+                singleSided: true,
                 type: "2d",
-                textureType: "image",
-                textureLocation: "./assets/images/CroquetLogo_RGB.jpg",
-                cardURL: "https://croquet.io",
-                cardHilite: 0xffffaa,
-                behaviorModules: ["URLLink"],
+            }
+        },
+        {
+            card: { // slot 2
+                name: "Croquet Video 1",
+                translation: [6.8, 1.35, 0],
+                scale: [5, 5, 5],
+                rotation: [0, -Math.PI / 2, 0],
+                layers: ["pointer"],
+                behaviorModules: ["VideoPlayer"],
+                color: 8947848,
+                depth: 0.025,
+                frameColor: 16777215,
+                fullBright: true,
+                textureType: "video",
+                textureLocation: "./assets/videos/Slot 2.mp4",
+                shadow: true,
+                singleSided: true,
+                type: "2d",
+            }
+        },
+        {
+            card: { // slot 3
+                name: "Croquet Video 2",
+                translation: [1.75, 1.25, 5.75],
+                rotation: [0, -1, 0, 0],
+                scale: [5, 5, 5],
+                type: "2d",
+                textureType: "video",
+                textureLocation: "./assets/videos/Slot 3.mp4",
                 fullBright: true,
                 frameColor: 0xcccccc,
                 color: 0xbbbbbb,
@@ -69,82 +130,67 @@ export function init(Constants) {
             }
         },
         {
-            card: {
-                name: "auggie stand",
-                translation: [7.79, -1.72, -14.82],
-                // rotation: [0, 0, 0, 1],
-                layers: ["pointer"],
-                behaviorModules: ["Billboard"],
-                dataLocation: "3en5pHEDZi7EpsaJ-_yONogv4uVau9ZlIxyh1TH4AhAQDRERFRZfSkoDDAkAFksQFksGFwoUEAARSwwKShBKHzAREjUqHyMQKjZULgwCKD8MUFZcHSMhIl1VV0oMCksGFwoUEAARSwgMBhcKEwAXFgBLEwQLABYWBEoOPFcnN1A0MQFUNQJSCFArMhcyMj8hIx8RDCMBIB06LygUJgYULAEjFDBVSgEEEQRKUAoHFCdQMwYEESE1NCscPTckDggoDDUwDyIgFTFXVw5IDAhREDc6Jwc0MA",
-                dataScale: [1, 1, 1],
-                fileName: "/AuggieStand.glb",
-                modelType: "glb",
-                shadow: true,
-                singleSided: true,
-                type: "3d",
-            }
-        },
+        card: {  // slot 4
+            name: "AWE Startup to Watch",
+            translation: [-6.5, 1.25, 5.75],
+            rotation: [0, -1, 0, 0],
+            scale: [5, 5, 5],
+            type: "2d",
+            textureType: "image",
+            textureLocation: "3XDWbb5JdYrdC1eegKLevCe76_mbANxZJsO6LYm1NjM4MCwsKCtid3c-MTQ9K3YtK3Y7KjcpLT0sdjE3dy13Ig0sLwgXIh4tFwtpEzE_FQIxbWthIB4cH2BoancxN3Y7KjcpLT0sdjUxOyo3Lj0qKz12NDc7OTQ8PS48PT45LTQsdyguaRETMCARISoSMzw7Cg9uOhEZKCshbWsOPB0wPD4ZG24UFAkdHBY5Pmh3PDksOXcTOWk3YTRhbgcUMG8uPzceMRMrPiopEB4_GhQ2EWEJbQsuFi0OABd1NQIR",
+            cardURL: "https://www.youtube.com/watch?v=XEkN4b-nZp4",
+            behaviorModules: ["URLLink"],
+            fullBright: true,
+            frameColor: 0xcccccc,
+            color: 0xbbbbbb,
+            cornerRadius: 0.05,
+            depth: 0.05,
+            shadow: true,
+        }
+    },
+    {
+        card: { // slot 5
+            name: "image card",
+            translation: [-12, 0.8, 0.1],
+            scale: [4, 4, 4],
+            rotation: [0, Math.PI / 2, 0],
+            type: "2d",
+            textureType: "image",
+            textureLocation: "./assets/images/CroquetLogo_RGB.jpg",
+            cardURL: "https://croquet.io",
+            behaviorModules: ["URLLink"],
+            fullBright: true,
+            frameColor: 0xcccccc,
+            color: 0xbbbbbb,
+            cornerRadius: 0.05,
+            depth: 0.05,
+            shadow: true,
+        }
+    },
+
+    {
+        card: { // 3d model
+            name: "auggie award",
+            translation: [-6.8, -1.875, 4],
+            rotation: [0, -1, 0, 0],
+            layers: ["pointer"],
+            dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
+            dataScale: [4, 4, 4],
+            fileName: "/Auggie2.glb",
+            modelType: "glb",
+            license: "CC-BY",
+            attribution: "'Auggie Awards Trophy AWE 2022' by Kai Oldman derived from 'Auggie Awards Trophy AWE 2021' (https://skfb.ly/otrIP) by oriinbar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
+            shadow: true,
+            singleSided: true,
+            type: "3d",
+        }
+    },
         {
-            card: {
-                name: "auggie award",
-                translation: [7.79, -0.45, -14.82],
-                // rotation: [0, 0, 0, 1],
-                layers: ["pointer"],
-                behaviorModules: ["Billboard"],
-                dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
-                fileName: "/Auggie2.glb",
-                modelType: "glb",
-                license: "CC-BY",
-                attribution: "'Auggie Awards Trophy AWE 2022' by Kai Oldman derived from 'Auggie Awards Trophy AWE 2021' (https://skfb.ly/otrIP) by oriinbar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
-                shadow: true,
-                singleSided: true,
-                type: "3d",
-            }
-        },
-       /*
-        {
-            card: {
-                translation: [-12, -0.4, -10.2],
-                rotation: [0, -Math.PI / 2, 0],
-                layers: ["pointer"],
-                className: "PortalActor",
-                color: 16737996,
-                cornerRadius: 0.05,
-                depth: 0.05,
-                frameColor: 8947848,
-                height: 2.4,
-                portalURL: "?world=refinery",
-                type: "2d",
-                width: 1.8,
-            }
-            },*/
-        {
-            card: {
-                name:"bouncinglogo",
-                translation: [12, 0.70, -10.24],
-                rotation: [0, -Math.PI / 2, 0],
-                behaviorModules: ["BouncingBall"],
-                scale: [3, 3, 3],
-                width: 1,
-                height: 1,
-                layers: ["pointer"],
-                type: "2d",
-                dataLocation: "./assets/SVG/full-circle.svg",
-                textureType: "dynamic",
-                textureWidth: 1024,
-                textureHeight: 1024,
-                frameColor: frameColor,
-                color: 0xffffff,
-                depth: 0.05,
-                fullBright: true,
-            }
-        },
-        {
-            card: {
+            card: { // slot 6
                 name: "bitcointracker",
-                translation: [-5, 0.6, -16.87],
+                translation: [-6.8, 1.35, -16.87],
                 rotation: [0, 0, 0],
-                scale: [3, 3, 3],
+                scale: [5, 5, 5],
                 type: "2d",
                 textureType: "canvas",
                 textureWidth: 1024,
@@ -186,184 +232,26 @@ export function init(Constants) {
                 behaviorModules: ["BarGraph"],
             }
         },
-
         {
-            card: {
-                name: "FlightTracker",
-                type: "object",
-                translation: [-10.752, -1.06, -15.7],
-                scale: [0.2, 0.2, 0.2],
-                behaviorModules: ["Elected", "FlightTracker", "Spin"],
-                layers: ["pointer"],
-                color: 0xaaaaaa,
-            }
-        },
-
-        {
-            card: {
-                name: "text editor",
-                className: "TextFieldActor",
-                translation: [5.5, 0.4, -16.87],
+            card: { // slot 7
+                name:"bouncinglogo",
+                translation: [1.75, 1.35, -16.87],
+                scale: [3, 3, 3],
                 rotation: [0, 0, 0],
-                depth: 0.05,
-                type: "text",
-                runs: [{text: "\nWelcome to the Croquet Gallery!\n"}],
-                margins: {left: 20, top: 20, right: 20, bottom: 20},
-                backgroundColor: 0xf4e056,
-                color: 0x000000,
-                //color: 0xf4e056,
-                frameColor: frameColor,
-                width: 2,
-                height: 2,
-                textScale: 0.002,
-                shadow: true,
-            }
-        },
-        {
-            card: {
-                name: "portal button",
-                translation: [-12.1, 1.3, -10.17839395666378],
-                behaviorModules: ["OpenRefineryPortalButton"],
-                type: "object",
-            }
-        },
-        /*
-        {
-            card: {
-                name: "sticky",
-                className: "TextFieldActor",
-                translation: [-12, 0.8, -12.2],
-                behaviorModules: ["StickyNote"],
-                rotation: [0, Math.PI / 2, 0],
-                depth: 0.05,
-                type: "text",
-                runs: [{text: `
-                    translation: [-12, -0.4, -10.2],
-                    rotation: [0, -1.5707963267948966, 0],
-                    layers: ["pointer"],
-                    className: "PortalActor",
-                    color: 16737996,
-                    cornerRadius: 0.05,
-                    depth: 0.05,
-                    frameColor: 8947848,
-                    height: 2.4,
-                    portalURL: "?world=refinery",
-                    type: "2d",
-                    width: 1.8,
-                    `}],
-                margins: {left: 20, top: 20, right: 20, bottom: 20},
-                backgroundColor: 0xf4e056,
-                //color: 0xf4e056,
-                frameColor: frameColor,
+                behaviorModules: ["BouncingBall"],
+                scale: [3, 3, 3],
                 width: 1,
                 height: 1,
-                textScale: 0.002,
-                shadow: true,
-            }
-        },
-        */
-        {
-            card: {
-                translation: [11.914606500892997, 0.75, 0.25],
-                scale: [4, 4, 4],
-                rotation: [0, -Math.PI / 2, 0],
                 layers: ["pointer"],
-                behaviorModules: ["PDFView"],
-                color: 8947848,
-                depth: 0.05,
-                frameColor: 16777215,
-                fullBright: true,
-                modelType: "pdf",
-                fileName: "/Croquet Microverse Product Deck - Oct 25b 2022 - Distro.pdf",
-                pdfLocation: "3HgyNLeuXEk5ULkVat-Q3pm19KHPQU3YmpYZBQTiumFQIDw8ODtyZ2cuISQtO2Y9O2YrOic5PS08ZiEnZz1nDyweKjEkATsJIxkrChAsew8wKT4xPx0DHxERemchJ2YrOic5PS08Zi8pJCQtOjFnIQIHOAYnB314ADp8CQwbJw8nCx8AGHplDQQBLycOB3w4CgV5OQ0ALR0XHWcsKTwpZwAMMB4FO39_fXxlO38bcBh8eQ0BDnB8eS0CIxsMcR8rEQsiPAs_Fx4iHyc",
-                //pdfLocation: "./assets/PDF/The Augmented Conversation.pdf",
-                shadow: true,
-                singleSided: true,
                 type: "2d",
-            }
-        },
-        /*
-          {
-            card: {
-                translation: [11.914606500892997, 0.4, 0.25],
-                scale: [4, 4, 4],
-                rotation: [0, -Math.PI / 2, 0],
-                layers: ["pointer"],
-                name: "/22.05.23 Croquet AWE Presentation.jpg",
-                cornerRadius: 0.02,
-                fileName: "/22.05.23 Croquet AWE Presentation.jpg",
-                fullBright: false,
-                modelType: "img",
-                shadow: true,
-                singleSided: true,
-                textureLocation: "36xe210tezWr_E_zOXjWN7_Oz_Olw09j9csX_tqBoesMXkJCRkUMGRlQX1pTRRhDRRhVRFlHQ1NCGF9ZGUMZcVJgVE9af0V3XWdVdG5SBXFOV0BPQWN9YW9vBBlfWRhVRFlHQ1NCGFtfVURZQFNERVMZVFUPTHhQcEFMREMAV0N-WVF7RloCBU9ZVXRwB0RgDl5zAWwAUH1GDg8AVRlSV0JXGXtQDkRfW3lcBXJgZVx6b1xVfm4CemVAD0R8TF1DRnBVAAdjZ0JTegZUAWc",
-                textureType: "image",
-                type: "2d",
-            }
-        }
-        */
-        {
-            card: {
-                name: "cradle",
-                type: "object",
-                translation: [-9.67815341742099, 3.2368919013826734, 3.968801765942323],
-                behaviorModules: ["Rapier", "Cradle"],
-                layers: ["pointer"],
-                shadow: true,
-                scale: [0.2, 0.2, 0.2],
-            }
-        },
-        {
-            card: {
-                name: "Physics Card",
-                translation: [5,0.6,17],
-                behaviorModules: ["ReplaceWorld"],
-                replaceWorldTargetURL: "https://croquet.github.io/physics/",
-                replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
-                rotation: [0, Math.PI, 0],
-                layers: ["pointer"],
-                scale: [4, 4, 4],
-                type: "2d",
-                textureType: "image",
-                textureLocation: "./assets/images/Fountain.png",
-                fullBright: true,
-                frameColor: 0xcccccc,
+                dataLocation: "./assets/SVG/full-circle.svg",
+                textureType: "dynamic",
+                textureWidth: 1024,
+                textureHeight: 1024,
+                frameColor: frameColor,
                 color: 0xffffff,
-                cornerRadius: 0.05,
                 depth: 0.05,
-                shadow: true,
-            }
-        },
-
-        {
-            card: {
-                name: "Mythos Card",
-                translation: [-5,0.6,17],
-                behaviorModules: ["ReplaceWorld"],
-                replaceWorldTargetURL: "https://croquet.github.io/mythos",
-                replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
-                rotation: [0, Math.PI, 0],
-                layers: ["pointer"],
-                scale: [4, 4, 4],
-                type: "2d",
-                textureType: "image",
-                textureLocation: "./assets/images/Croquet Mythos.png",
                 fullBright: true,
-                frameColor: 0xcccccc,
-                color: 0xffffff,
-                cornerRadius: 0.05,
-                depth: 0.05,
-                shadow: true,
-            }
-        },
-        {
-            card: { // avatar spawn location
-                name: "entrance",
-                type: "object",
-                // same position and orientation as in openPortal.js
-                translation: [-12, -0.4, -10.2],
-                rotation: [0, -Math.PI / 2, 0],
-                spawn: "default",
             }
         },
     ];

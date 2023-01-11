@@ -26,7 +26,7 @@ class OpenRefineryPortalActor {
             cornerRadius: 0.05,
             depth: 0.05,
             frameColor: 8947848,
-            portalURL: "https://croquet.io/microverse?world=factory",
+            portalURL: "?world=factory",
             type: "2d",
             width: 1.8,
             height: 2.4,
@@ -56,8 +56,7 @@ class OpenRefineryPortalPawn {
     }
 
     makeButton() {
-        this.shape.children.forEach((c) => this.shape.remove(c));
-        this.shape.children = [];
+        [...this.shape.children].forEach((c) => this.shape.remove(c));
 
         let geometry = new Microverse.THREE.SphereGeometry(0.15, 16, 16);
         let material = new Microverse.THREE.MeshStandardMaterial({color: 0xcccccc, metalness: 0.8});

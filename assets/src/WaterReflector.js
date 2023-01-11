@@ -30,7 +30,7 @@
 		const distortionScale = options.distortionScale !== undefined ? options.distortionScale : 20.0;
 		const side = options.side !== undefined ? options.side : THREE.FrontSide;
 		const fog = options.fog !== undefined ? options.fog : false;
-
+		const turbulence = options.turbulence !== undefined ? options.turbulence : 1.5;
 		//
 
 		const mirrorPlane = new THREE.Plane();
@@ -59,15 +59,16 @@
 				{
 					'normalSampler': { value: null },
 					'mirrorSampler': { value: null },
-					'alpha': { value: 1.0 },
-					'time': { value: 0.0 },
-					'size': { value: 1.0 },
-					'distortionScale': { value: 20.0 },
+					'alpha': { value: alpha},
+					'time': { value: time },
+					'size': { value: 1 },
+					'distortionScale': { value: distortionScale },
 					'textureMatrix': { value: new THREE.Matrix4() },
 					'sunColor': { value: new THREE.Color( 0x7F7F7F ) },
 					'sunDirection': { value: new THREE.Vector3( 0.70707, 0.70707, 0 ) },
 					'eye': { value: new THREE.Vector3() },
-					'waterColor': { value: new THREE.Color( 0x555555 ) }
+					'waterColor': { value: new THREE.Color( waterColor ) },
+					'turbulence': { value: turbulence }
 				}
 			] ),
 
@@ -108,7 +109,7 @@
 				uniform vec3 sunDirection;
 				uniform vec3 eye;
 				uniform vec3 waterColor;
-
+				uniform float turbulence;
 				varying vec4 mirrorCoord;
 				varying vec4 worldPosition;
 
@@ -144,7 +145,8 @@
 
 					#include <logdepthbuf_fragment>
 					vec4 noise = getNoise( worldPosition.xz * size );
-					vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 1.0, 1.5 ) );
+					//vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 1.0, 1.5 ) );
+					vec3 surfaceNormal = normalize( noise.xzy * vec3( turbulence, 1.0, turbulence ) );
 
 					vec3 diffuseLight = vec3(0.0);
 					vec3 specularLight = vec3(0.0);
