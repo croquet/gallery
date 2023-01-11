@@ -1,4 +1,4 @@
-class OpenRefineryPortalActor {
+class PortalButtonActor {
     setup() {
         this.addEventListener("pointerTap", "pressed");
     }
@@ -17,26 +17,31 @@ class OpenRefineryPortalActor {
         if (this.hasOpened) {return;}
         this.hasOpened = true;
 
+        let translation = this._cardData.openPortalTranslation || [0, 0, 0];
+        let rotation = this._cardData.openPortalRotation || [0, 0, 0];
+        let width = this._cardData.openPortalWidth || 1;
+        let height = this._cardData.openPortalHeight || 1;
+        let portalURL = this._cardData.openPortalURL || "https://croquet.io/microverse/";
         this.createCard({
-            translation: [-12, -0.4, -10.8],
-            rotation: [0, -1.5707963267948966, 0],
+            translation,
+            rotation,
             layers: ["pointer"],
             className: "PortalActor",
             color: 16737996,
             cornerRadius: 0.05,
             depth: 0.05,
             frameColor: 8947848,
-            portalURL: "https://croquet.io/datacenter/",
+            portalURL,
             type: "2d",
-            width: 1.8,
-            height: 2.4,
+            width,
+            height,
         });
 
         this.say("portalChanged");
     }
 }
 
-class OpenRefineryPortalPawn {
+class PortalButtonPawn {
     setup() {
         this.addEventListener("pointerMove", "nop");
         this.addEventListener("pointerEnter", "hilite");
@@ -79,9 +84,9 @@ class OpenRefineryPortalPawn {
 export default {
     modules: [
         {
-            name: "OpenRefineryPortalButton",
-            actorBehaviors: [OpenRefineryPortalActor],
-            pawnBehaviors: [OpenRefineryPortalPawn]
+            name: "OpenPortalButton",
+            actorBehaviors: [PortalButtonActor],
+            pawnBehaviors: [PortalButtonPawn]
         }
     ]
 }

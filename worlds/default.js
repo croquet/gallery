@@ -19,8 +19,8 @@ export function init(Constants) {
             card: {
                 name: "entrance",
                 type: "object",
-                // same position and orientation as in openPortal.js
-                translation: [-12, -0.4, -10.2],
+                // match position of portal opened below
+                translation: [-12, -0.4, -10.82],
                 rotation: [0, -1.97, 0],
                 spawn: "default",
             }
@@ -44,7 +44,7 @@ export function init(Constants) {
                 placeholderOffset: [0, 0, 0],
             }
         },
-        {        
+        {
             card:{
                 name:"pool",
                 type: "object",
@@ -65,13 +65,18 @@ export function init(Constants) {
                 dataType: "exr",
             }
         },
-
         {
-            card: { // this opens the portal in the wrong place in the small world
+            card: {
                 name: "portal button",
                 translation: [-12.1, 1.3, -10.82],
-                behaviorModules: ["OpenRefineryPortalButton"],
+                behaviorModules: ["OpenPortalButton"],
                 type: "object",
+                // entrance card should match this position
+                openPortalTranslation: [-12.1, -0.4, -10.82],
+                openPortalRotation: [0, -Math.PI / 2, 0],
+                openPortalWidth: 1.8,
+                openPortalHeight: 2.4,
+                openPortalURL: "https://croquet.io/datacenter/",
             }
         },
         {
