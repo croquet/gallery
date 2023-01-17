@@ -161,6 +161,25 @@ export function init(Constants) {
             }
         },
         {
+            card: { // slot 5
+                name: "image card",
+                translation: [-12, 0.8, 0.1],
+                scale: [4, 4, 4],
+                rotation: [0, Math.PI / 2, 0],
+                type: "2d",
+                textureType: "image",
+                textureLocation: "./assets/images/CroquetLogo_RGB.jpg",
+                cardURL: "https://croquet.io",
+                behaviorModules: ["URLLink"],
+                fullBright: true,
+                frameColor: 0xcccccc,
+                color: 0xbbbbbb,
+                cornerRadius: 0.05,
+                depth: 0.05,
+                shadow: true,
+            }
+        }, 
+        {
             card: { // 3d model
                 name: "auggie award",
                 translation: [-10.9, -1.875, 4],
