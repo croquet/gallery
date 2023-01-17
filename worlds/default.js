@@ -160,45 +160,23 @@ export function init(Constants) {
                 shadow: true,
             }
         },
-        
-    {
-        card: {
-            name: "Physics Card",
-            translation: [5,0.6,17],
-            behaviorModules: ["ReplaceWorld"],
-            replaceWorldTargetURL: "https://croquet.github.io/physics/",
-            replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
-            rotation: [0, Math.PI, 0],
-            layers: ["pointer"],
-            scale: [4, 4, 4],
-            type: "2d",
-            textureType: "image",
-            textureLocation: "./assets/images/Fountain.png",
-            fullBright: true,
-            frameColor: 0xcccccc,
-            color: 0xffffff,
-            cornerRadius: 0.05,
-            depth: 0.05,
-            shadow: true,
-        }
-    },
-    {
-        card: { // 3d model
-            name: "auggie award",
-            translation: [-10.9, -1.875, 4],
-            rotation: [0, -0.9629921455836804, 0, -0.2695294558005481],
-            layers: ["pointer"],
-            dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
-            dataScale: [4, 4, 4],
-            fileName: "/Auggie2.glb",
-            modelType: "glb",
-            license: "CC-BY",
-            attribution: "'Auggie Awards Trophy AWE 2022' by Kai Oldman derived from 'Auggie Awards Trophy AWE 2021' (https://skfb.ly/otrIP) by oriinbar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
-            shadow: true,
-            singleSided: true,
-            type: "3d",
-        }
-    },
+        {
+            card: { // 3d model
+                name: "auggie award",
+                translation: [-10.9, -1.875, 4],
+                rotation: [0, -0.9629921455836804, 0, -0.2695294558005481],
+                layers: ["pointer"],
+                dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
+                dataScale: [4, 4, 4],
+                fileName: "/Auggie2.glb",
+                modelType: "glb",
+                license: "CC-BY",
+                attribution: "'Auggie Awards Trophy AWE 2022' by Kai Oldman derived from 'Auggie Awards Trophy AWE 2021' (https://skfb.ly/otrIP) by oriinbar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
+                shadow: true,
+                singleSided: true,
+                type: "3d",
+            }
+        },
         {
             card: { // slot 6
                 name: "bitcointracker",
