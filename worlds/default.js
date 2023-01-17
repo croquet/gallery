@@ -9,7 +9,7 @@ export function init(Constants) {
 
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "openPortal.js", "urlLink.js", "text3D.js", "pool.js", "video.js"
+        "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "replaceWorld.js", "openPortal.js", "urlLink.js", "text3D.js", "pool.js", "video.js"
     ];
 
     const frameColor = 0x888888;
@@ -119,65 +119,74 @@ export function init(Constants) {
         },
         {
             card: { // slot 3
-                name: "Croquet Video 2",
+                name: "Physics Card",
                 translation: [1.75, 1.25, 5.75],
+                behaviorModules: ["ReplaceWorld"],
+                replaceWorldTargetURL: "https://croquet.github.io/physics/",
+                replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
                 rotation: [0, -1, 0, 0],
+                layers: ["pointer"],
                 scale: [5, 5, 5],
                 type: "2d",
-                textureType: "video",
-                textureLocation: "./assets/videos/Slot 3.mp4",
+                textureType: "image",
+                textureLocation: "./assets/images/Fountain.png",
                 fullBright: true,
                 frameColor: 0xcccccc,
-                color: 0xbbbbbb,
+                color: 0xffffff,
                 cornerRadius: 0.05,
                 depth: 0.05,
                 shadow: true,
             }
         },
         {
-        card: {  // slot 4
-            name: "AWE Startup to Watch",
-            translation: [-6.5, 1.25, 5.75],
-            rotation: [0, -1, 0, 0],
-            scale: [5, 5, 5],
-            type: "2d",
-            textureType: "image",
-            textureLocation: "3XDWbb5JdYrdC1eegKLevCe76_mbANxZJsO6LYm1NjM4MCwsKCtid3c-MTQ9K3YtK3Y7KjcpLT0sdjE3dy13Ig0sLwgXIh4tFwtpEzE_FQIxbWthIB4cH2BoancxN3Y7KjcpLT0sdjUxOyo3Lj0qKz12NDc7OTQ8PS48PT45LTQsdyguaRETMCARISoSMzw7Cg9uOhEZKCshbWsOPB0wPD4ZG24UFAkdHBY5Pmh3PDksOXcTOWk3YTRhbgcUMG8uPzceMRMrPiopEB4_GhQ2EWEJbQsuFi0OABd1NQIR",
-            cardURL: "https://www.youtube.com/watch?v=XEkN4b-nZp4",
-            behaviorModules: ["URLLink"],
-            fullBright: true,
-            frameColor: 0xcccccc,
-            color: 0xbbbbbb,
-            cornerRadius: 0.05,
-            depth: 0.05,
-            shadow: true,
-        }
-    },
-    {
-        card: { // slot 5
-            name: "image card",
-            translation: [-12, 0.8, 0.1],
-            scale: [4, 4, 4],
-            rotation: [0, Math.PI / 2, 0],
-            type: "2d",
-            textureType: "image",
-            textureLocation: "./assets/images/CroquetLogo_RGB.jpg",
-            cardURL: "https://croquet.io",
-            behaviorModules: ["URLLink"],
-            fullBright: true,
-            frameColor: 0xcccccc,
-            color: 0xbbbbbb,
-            cornerRadius: 0.05,
-            depth: 0.05,
-            shadow: true,
-        }
-    },
+            card: { // slot 4
+                name: "Mythos Card",
+                translation: [-6.5, 1.25, 5.75],
 
+                behaviorModules: ["ReplaceWorld"],
+                replaceWorldTargetURL: "https://croquet.github.io/mythos",
+                replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
+                rotation: [0, Math.PI, 0],
+                layers: ["pointer"],
+                scale: [5, 5, 5],
+                type: "2d",
+                textureType: "image",
+                textureLocation: "./assets/images/Croquet Mythos.png",
+                fullBright: true,
+                frameColor: 0xcccccc,
+                color: 0xffffff,
+                cornerRadius: 0.05,
+                depth: 0.05,
+                shadow: true,
+            }
+        },
+        
+    {
+        card: {
+            name: "Physics Card",
+            translation: [5,0.6,17],
+            behaviorModules: ["ReplaceWorld"],
+            replaceWorldTargetURL: "https://croquet.github.io/physics/",
+            replaceWorldPreserveOrigin: "(.*\.)?croquet.(io|dev)$",
+            rotation: [0, Math.PI, 0],
+            layers: ["pointer"],
+            scale: [4, 4, 4],
+            type: "2d",
+            textureType: "image",
+            textureLocation: "./assets/images/Fountain.png",
+            fullBright: true,
+            frameColor: 0xcccccc,
+            color: 0xffffff,
+            cornerRadius: 0.05,
+            depth: 0.05,
+            shadow: true,
+        }
+    },
     {
         card: { // 3d model
             name: "auggie award",
-            translation: [-6.8, -1.875, 4],
-            rotation: [0, -1, 0, 0],
+            translation: [-10.9, -1.875, 4],
+            rotation: [0, -0.9629921455836804, 0, -0.2695294558005481],
             layers: ["pointer"],
             dataLocation: "35hI1OQ1NaqWki0Or-uHXAVM9vipZGVZIc_emQwLfCAcXUFBRUYPGhpTXFlQRhtARhtWR1pEQFBBG1xaGkAaT2BBQmV6T3NAemYEflxSeG9cAAYMTXNxcg0FBxpcWhtWR1pEQFBBG1hcVkdaQ1BHRlAbQ1RbUEZGVBpebAd3ZwBkYVEEZVICWAB7YkdiYm9xc09BXHNRcE1qf3hEdlZEfFFzRGAFGlFUQVQabV1-bFdNZAdnBAxCfnAYXk9kamVaAUVbBnt3QUBaWwUEfnhPb1RWfhhqDQ",
             dataScale: [4, 4, 4],
