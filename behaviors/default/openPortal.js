@@ -1,6 +1,6 @@
 class PortalButtonActor {
     setup() {
-        this.addEventListener("pointerTap", "pressed");
+        this.listen("openPortal", "openPortal");
     }
 
     check() {
@@ -12,7 +12,7 @@ class PortalButtonActor {
         return card.layers.includes("portal");
     }
 
-    pressed() {
+    openPortal(portalURL) {
         this.check();
         if (this.hasOpened) {return;}
         this.hasOpened = true;
@@ -21,7 +21,6 @@ class PortalButtonActor {
         let rotation = this._cardData.openPortalRotation || [0, 0, 0];
         let width = this._cardData.openPortalWidth || 1;
         let height = this._cardData.openPortalHeight || 1;
-        let portalURL = this._cardData.openPortalURL || "https://croquet.io/microverse/";
         this.createCard({
             translation,
             rotation,
@@ -46,6 +45,7 @@ class PortalButtonPawn {
         this.addEventListener("pointerMove", "nop");
         this.addEventListener("pointerEnter", "hilite");
         this.addEventListener("pointerLeave", "unhilite");
+        this.addEventListener("pointerTap", "pressedButton");
         this.makeButton();
         this.listen("portalChanged", "setColor");
     }
@@ -78,6 +78,21 @@ class PortalButtonPawn {
     unhilite() {
         this.entered = false;
         this.setColor();
+    }
+
+    pressedButton() {
+        if (this.actor.hasOpened) {return;}
+        let portalURL = this.resolveApp(this.actor._cardData.openPortalURL);
+        this.say("openPortal", portalURL);
+    }
+
+    resolveApp(app = "microverse") {
+        if (app.includes("/")) {return app;}
+        let { hostname } = window.location;
+        if (hostname.endsWith("croquet.io") || hostname.endsWith("croquet.dev")) {
+            return `../${app}/`;
+        }
+        return `https://croquet.io/${app}/`;
     }
 }
 

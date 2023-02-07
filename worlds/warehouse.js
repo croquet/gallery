@@ -77,7 +77,7 @@ export function init(Constants) {
                 openPortalRotation: [0, -Math.PI / 2, 0],
                 openPortalWidth: 1.8,
                 openPortalHeight: 2.4,
-                openPortalURL: "https://croquet.io/datacenter/",
+                openPortalURL: "factory", // expanded to croquet.io URL
             }
         },
         {

@@ -76,7 +76,7 @@ export function init(Constants) {
                 openPortalRotation: [0, -Math.PI / 2, 0],
                 openPortalWidth: 1.8,
                 openPortalHeight: 2.4,
-                openPortalURL: "https://croquet.io/factory/",
+                openPortalURL: "factory", // expanded to croquet.io URL
             }
         },
         {
@@ -178,7 +178,7 @@ export function init(Constants) {
                 depth: 0.05,
                 shadow: true,
             }
-        }, 
+        },
         {
             card: { // 3d model
                 name: "auggie award",
