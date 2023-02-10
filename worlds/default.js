@@ -12,6 +12,9 @@ export function init(Constants) {
         "demo.js", "lights.js", "bouncingBall.js", "bitcoinTracker.js", "spin.js", "replaceWorld.js", "openPortal.js", "urlLink.js", "text3D.js", "pool.js", "video.js"
     ];
 
+    Constants.ExcludedSystemBehaviorModules = ["gizmo.js"];
+    Constants.IncludedSystemBehaviorModules = ["pedestal.js"];
+
     const frameColor = 0x888888;
 
     Constants.DefaultCards = [
