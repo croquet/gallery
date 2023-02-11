@@ -197,6 +197,7 @@ export function init(Constants) {
                 shadow: true,
                 singleSided: true,
                 type: "3d",
+                behaviorModules: ["Spin"],
             }
         },
         {
