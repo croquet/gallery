@@ -26,6 +26,13 @@ class VideoActor {
         this.subscribe(this.id, "playPressed", "playPressed");
         this.subscribe(this.id, "pausePressed", "pausePressed");
         this.subscribe(this.id, "rewindPressed", "rewindPressed");
+
+        this.buttonPrototype = this.createCard({
+            type: "object",
+            isPrototype: true,
+            parent: this,
+            behaviorModules: ["VideoButton"]
+        });
     }
 
     addButtons() {
@@ -464,6 +471,7 @@ class VideoButtonActor {
     // }
 
     setProperties(props) {
+        if (this._cardData.isPrototype) {return;}
         const { name, svgScale, svgPosition, backgroundOpacity } = props;
         this.buttonName = name;
         this.svgScale = svgScale;
@@ -474,6 +482,8 @@ class VideoButtonActor {
 
 class VideoButtonPawn {
     setup() {
+        if (this.actor._cardData.isPrototype) {return;}
+        
         this.subscribe(this.id, "2dModelLoaded", "svgLoaded");
 
         this.addEventListener("pointerMove", "nop");
@@ -503,7 +513,7 @@ class VideoButtonPawn {
         const radius = 1.25 / svgScale / 2;
         const segments = 32;
         const geometry = new Microverse.THREE.CylinderGeometry(radius, radius, depth, segments);
-        const material = new Microverse.THREE.MeshBasicMaterial({ color: 0xa0a0a0, side: Microverse.THREE.DoubleSide, transparent: true, opacity: backgroundOpacity });
+        const material = new Microverse.THREE.MeshBasicMaterial({ color: 0xa0a0a0, side: Microverse.THREE.DoubleSide, transparent: true, opacity: backgroundOpacity, toneMapped: false});
         const hittableMesh = new Microverse.THREE.Mesh(geometry, material);
         hittableMesh.rotation.x = Math.PI / 2;
         hittableMesh.position.z = -depth / 2;

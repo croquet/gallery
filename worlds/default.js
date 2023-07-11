@@ -66,6 +66,7 @@ export function init(Constants) {
                 fileName: "/shanghai_riverside_2k.exr",
                 dataLocation: "32nxXNZxuyT3h-bh0OX-2uMdBRJ0WmDduuTJwwewEE60WkZGQkEIHR1UW15XQRxHQRxRQF1DR1dGHFtdHUcddVZkUEtee0FzWWNRcGpWAXVKU0RLRWd5ZWtrAB1bXRxRQF1DR1dGHF9bUUBdRFdAQVcdAH9ae3ZoZVdYW1FVZgNDBVZ9SAR2R1lgalt_cAMfW1h5cXYAfGtWX3lQex1WU0ZTHXVreUhtUEFeU218aAYDRVxqAHB_Rn5YZmFFZWsAZERtWHF_WkIGZEtRdnM",
                 dataType: "exr",
+                toneMappingExposure: 1.2,
             }
         },
         {
@@ -109,7 +110,7 @@ export function init(Constants) {
                 rotation: [0, -Math.PI / 2, 0],
                 layers: ["pointer"],
                 behaviorModules: ["VideoPlayer"],
-                color: 8947848,
+                color: 0xeeeeee,
                 depth: 0.025,
                 frameColor: 16777215,
                 fullBright: true,

@@ -11,7 +11,7 @@ class CircleActor {
         if (!this.circling) {return;}
         this.future(20).step();
         this.rotateBy(0.01);
-        this.forwardBy(-0.03);
+        this.forwardBy(0.03);
     }
 
     toggle() {
@@ -32,7 +32,7 @@ export default {
         {
             name: "Circle",
             actorBehaviors: [CircleActor],
-        }
+        },
     ]
 }
 
