@@ -13,7 +13,7 @@ export async function prelude() {
       this file by uncomment the following line:
     */
 
-    // window.microverseEnablePortal = true;
+    window.microverseEnablePortal = true;
 
     /*
       There are two display quality options.  WebGL antialiasing is
