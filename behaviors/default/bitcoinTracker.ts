@@ -2,27 +2,34 @@
 // https://croquet.io
 // info@croquet.io
 
-/*
+// the following import statement is solely for the type checking and
+// autocompletion features in IDE.  A Behavior cannot inherit from
+// another behavior or a base class but can use the methods and
+// properties of the card to which it is installed.
+// The prototype classes ActorBehavior and PawnBehavior provide
+// the features defined at the card object.
 
+import {ActorBehavior, PawnBehavior} from "../PrototypeBehavior";
+
+/*
 This module manages a list of recent values from a bitcoin position
 server. It is used with the Elected module, so that one of
 participants is chosen to fetch values.
 
-*/
-
-/*
-
 BitcoinTrackerActor's history is a list of {date<milliseconds>, and amount<dollar>}
-
 */
 
-class BitcoinTrackerActor {
+type History = {date: number, amount: number};
+type BarMesh = THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+
+class BitcoinTrackerActor extends ActorBehavior {
+    history: Array<History>;
     setup() {
         if (!this.history) {
             this.history = [{ date: 0, amount: 0 }];
         }
-        this.listen("BTC-USD", "onBitcoinData");
-        this.listen("BTC-USD-history", "onBitcoinHistory");
+        this.listen<History>("BTC-USD", this.onBitcoinData);
+        this.listen<Array<History>>("BTC-USD-history", this.onBitcoinHistory);
     }
 
     latest() {
@@ -34,26 +41,32 @@ class BitcoinTrackerActor {
         // the last data point, and publishes value-change event.
         if (date - this.latest().date < 1000) return;
         this.addEntries({date, amount});
-        this.say("value-changed", amount);
+        this.say<number>("value-changed", amount);
     }
 
-    onBitcoinHistory(prices) {
+    onBitcoinHistory(prices: Array<History>) {
         const newer = prices.filter(p => p.date - this.latest().date > 25000);
         this.addEntries(...newer);
-        this.publish(this.id, "value-init", newer.map(v=>v.amount));
+        this.publish<Array<number>>(this.id, "value-init", newer.map(v=>v.amount));
     }
 
-    addEntries(...data) {
+    addEntries(...data: Array<History>) {
+        if (data.length === 0) {return;}
         this.history.push(...data);
         if (this.history[0].date === 0) {this.history.shift();}
         if (this.history.length > 300) {this.history.shift();}
     }
 }
 
-class BitcoinTrackerPawn {
+class BitcoinTrackerPawn extends PawnBehavior {
+    lastAmount: number;
+    socket: WebSocket;
+    canvas: HTMLCanvasElement;
+    texture: THREE.CanvasTexture;
+
     setup() {
         this.lastAmount = 0;
-        this.listen("value-changed", "onBTCUSDChanged");
+        this.listen<number>("value-changed", "onBTCUSDChanged");
 
         this.onBTCUSDChanged();
 
@@ -157,6 +170,8 @@ class BitcoinTrackerPawn {
 
         this.clear("#050505");
         let ctx = this.canvas.getContext("2d");
+        if (!ctx) return;
+        if (!this.texture) return;
         ctx.textAlign = "right";
         ctx.fillStyle = color;
 
@@ -172,6 +187,7 @@ class BitcoinTrackerPawn {
 
     clear(fill) {
         let ctx = this.canvas.getContext("2d");
+        if (!ctx) return;
         ctx.fillStyle = fill;
         ctx.fillRect( 0, 0, this.canvas.width, this.canvas.height );
     }
@@ -181,7 +197,8 @@ class BitcoinTrackerPawn {
     }
 }
 
-class BitLogoPawn {
+class BitLogoPawn extends PawnBehavior {
+    lastColor: string
     setup() {
         // this is a case where a method of the base object is called.
         this.subscribe(this.parent.id, "setColor", "setColor");
@@ -191,23 +208,23 @@ class BitLogoPawn {
     setColor(color) {
         if (color === this.lastColor) {return;}
         let material = this.makePlaneMaterial(this.actor._cardData.depth, color, this.actor._cardData.frameColor, false);
-        let obj = this.shape.children.find((o) => o.name === "2d");
+        let obj = this.shape.children.find((o) => o.name === "2d") as BarMesh;
         if (!obj || !obj.children || obj.children.length === 0) {return;}
-        obj = obj.children[0];
-        obj.material = material;
+        obj = obj.children[0] as BarMesh;
+        obj.material = (material as THREE.MeshStandardMaterial);
         this.lastColor = color;
     }
 }
 
-class BarGraphActor {
+class BarGraphActor extends ActorBehavior {
     setup() {
         if (this._cardData.values === undefined) {
             this._cardData.values = [];
             this._cardData.length = 20;
             this._cardData.height = 0.5;
         }
-        this.subscribe(this.parent.id, "value-changed", this.updateBars);
-        this.subscribe(this.parent.id, "value-init", this.initBars);
+        this.subscribe<number>(this.parent.id, "value-changed", "updateBars");
+        this.subscribe<Array<number>>(this.parent.id, "value-init", "initBars");
     }
 
     length() {
@@ -222,7 +239,7 @@ class BarGraphActor {
         return this._cardData.values;
     }
 
-    updateBars(value, notSay) {
+    updateBars(value: number, notSay: boolean) {
         let values = this._cardData.values;
         values.push(value);
         if (values.length > this.length()) {
@@ -234,13 +251,16 @@ class BarGraphActor {
         }
     }
 
-    initBars(values) {
+    initBars(values: Array<number>) {
         values.forEach((value) => this.updateBars(value, true));
         this.say("updateGraph");
     }
 }
 
-class BarGraphPawn {
+class BarGraphPawn extends PawnBehavior {
+    bars: Array<BarMesh>;
+    bar: BarMesh;
+    base: BarMesh;
     setup() {
         this.constructBars();
         this.listen("updateGraph", "updateGraph");
@@ -251,7 +271,7 @@ class BarGraphPawn {
 
     constructBars() {
         [...this.shape.children].forEach((c) => {
-            c.material.dispose();
+            ((c as BarMesh).material as {dispose}).dispose();
             this.shape.remove(c);
         });
         this.bars = [];
@@ -269,7 +289,7 @@ class BarGraphPawn {
             new THREE.MeshStandardMaterial({color: color, emissive: color}));
         for(let i = 0; i < len; i++) {
             let bar = this.bar.clone();
-            bar.material = bar.material.clone();
+            bar.material = (bar.material as THREE.MeshStandardMaterial).clone();
             bar.position.set((0.5 + i - len / 2) * size, 0,0);
             this.shape.add(bar);
             this.bars.push(bar);
@@ -282,7 +302,7 @@ class BarGraphPawn {
         this.base.material.emissive = c;
     }
 
-    updateGraph(){
+    updateGraph() {
         let values = this.actor._cardData.values;
         let height = this.actor._cardData.height;
         let mn = Math.min(...values);
