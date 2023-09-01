@@ -44,7 +44,6 @@ export async function prelude() {
           let css = document.createElement("link");
           css.rel = "stylesheet";
           css.type = "text/css";
-          css.
           css.id = "joystick-css";
           css.onload = resolve;
           css.href = "/assets/css/joystick.css";
@@ -59,14 +58,6 @@ export async function prelude() {
       converted to a Promise. Your custom code may return an explicit
       Promise like the one above.
     */
-
-    await new Promise((resolve, reject) => {
-        let script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/npm/typescript@5.1.6/lib/typescript.min.js";
-        script.onload = resolve;
-        script.type = "text/javascript";
-        document.head.appendChild(script);
-    });
 
     return null;
 }
