@@ -3,7 +3,16 @@
 // A very simple demonstration of how to create a similar application
 // using the DynamicTexture surface.
 
-class BouncingLogoActor {
+// the following import statement is solely for the type checking and
+// autocompletion features in IDE.  A Behavior cannot inherit from
+// another behavior or a base class but can use the methods and
+// properties of the card to which it is installed.
+// The prototype classes ActorBehavior and PawnBehavior provide
+// the features defined at the card object.
+
+import {ActorBehavior, PawnBehavior} from "../PrototypeBehavior";
+
+class BouncingLogoActor extends ActorBehavior {
     setup() {
         this.SPEED = 10;
         this.position = [512, 512];
@@ -51,7 +60,7 @@ class BouncingLogoActor {
     }
 }
 
-class BouncingLogoPawn {
+class BouncingLogoPawn extends PawnBehavior {
     setup() {
         this.updatePosition(this.actor.position);
         this.listen("updatePosition", "updatePosition");
